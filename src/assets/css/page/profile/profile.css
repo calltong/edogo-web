@@ -1,0 +1,30 @@
+.profile-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.profile-menu-item {
+  color: #6A6A6A;
+}
+
+.profile-menu-item-active {
+  color: black;
+}
+
+.profile-menu-item:hover, .profile-menu-item-active:hover {
+  background-color: #94C1FA;
+}
+
+.profile-menu-item > i, .profile-menu-item-active > i {
+  margin-right: 5px;
+  width: 15px;
+}
+
+.profile-menu-item-active > i {
+  color: red;
+}
+
+.profile-btn-upload {
+  margin-top: 5px;
+  font-size: 12px;
+}

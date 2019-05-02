@@ -1,0 +1,61 @@
+
+.whiteboard {
+  cursor: crosshair;
+  position: fixed;
+  background-color: #FFFFFF;
+}
+
+.whiteboard-menu {
+
+}
+
+.whiteboard-menu-btn {
+  width: 80px;
+  min-height: 25px;
+}
+
+.whiteboard-menu-btn-icon {
+  padding: 1px 5px 2px;
+  border-color: white;
+}
+
+.whiteboard-menu-btn-icon > i {
+  font-size: 18px;
+}
+
+.whiteboard-menu-color {
+  min-width: 6rem;
+}
+
+.whiteboard-menu-color > .dropdown-item {
+  padding: 1px 7px 2px;
+}
+
+.whiteboard-menu-color-btn {
+  width: 100%;
+  border-radius: 2px;
+  border: solid .1rem '#E1E1E1';
+  height: 25px;
+}
+
+.whiteboard-nav-link {
+  padding: .4rem .1rem;
+}
+
+.whiteboard-menu-line-btn {
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 34px;
+  margin-top: 5px;
+  height: 19px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.whiteboard-menu-line-item {
+  margin-top: 12px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+}

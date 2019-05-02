@@ -1,0 +1,75 @@
+.header {
+  color: white;
+  background-color: #26548F;
+  padding: 5px 80px;
+}
+
+.header > a:hover {
+  color: white;
+}
+
+.header-name {
+  color: white;
+}
+
+.header-menu > i {
+  color: white;
+  background-color: #26548F;
+}
+
+.header-item > li > a {
+  color: white;
+  background-color: #26548F;
+}
+
+.header-btn {
+  border: 0px solid white;
+  background-color: #26548F;
+  margin-right: 2px;
+}
+
+.header-signup {
+  border: 1px solid white;
+  background-color: #26548F;
+}
+
+.header-profile {
+  padding: 0px;
+}
+
+.header-profile-icon {
+  height: 40px;
+  width: 40px;
+  font-size: 35px;
+  text-align: center;
+  padding: 0px;
+}
+
+.header-profile-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 49.9%;
+  border: 1px solid white;
+  padding: 0px;
+}
+
+.header-profile-menu-btn {
+  color: black;
+}
+
+.header-find {
+  width: 400px;
+  margin-left: 5px;
+}
+
+@media (max-width: 768) {
+  .header {
+    padding: 5px 65px;
+  }
+}
+
+@media (max-width: 425px) {
+  .header {
+    padding: 5px 20px;
+  }
+}

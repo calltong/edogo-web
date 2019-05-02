@@ -1,0 +1,73 @@
+
+body {
+  background-color: #F2F6F7;
+}
+
+.app-body {
+  padding: 10px 15px !important;
+  min-height: 540px;
+}
+
+.app-content {
+  padding: 30px 60px;
+}
+
+.layout-form {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.image-title {
+  width: 100%;
+  min-height: 80px;
+}
+
+.layout-form-icon {
+  padding: 5px;
+  font-size: 100px;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  padding: 0px;
+}
+
+.react-datepicker__time-container, .react-datepicker__time, .react-datepicker__time-box {
+  width: 100px !important;
+}
+
+.text-invalid {
+  color: #dc3545;
+  margin-top: .25rem;
+  font-size: 80%;
+}
+
+.border-invalid {
+  border-color: #dc3545;
+}
+
+.border-invalid .css-vj8t7z {
+  border-color: #dc3545;
+}
+
+.find-box-input, .find-box-input:focus {
+  width: 90%;
+  border: 0px solid black;
+  box-shadow: 0 0 0 0 white;
+}
+
+.find-box-btn, .find-box-btn:focus {
+  border: 0px solid black;
+}
+
+@media (max-width: 768) {
+  .app-body {
+    padding: 8px 65px !important;
+  }
+}
+
+@media (max-width: 425px) {
+  .app-body {
+    padding: 8px 20px !important;
+  }
+}

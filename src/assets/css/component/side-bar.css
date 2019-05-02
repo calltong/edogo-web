@@ -1,0 +1,26 @@
+.side-bar {
+  background-color: #E2E2E3;
+  min-height: 800px;
+}
+
+.side-bar-item {
+  color: black;
+}
+
+.side-bar-item:hover {
+  background-color: #94C1FA;
+}
+
+.side-bar-subtitle:hover {
+
+  background-color: #94C1FA;
+}
+
+.side-bar-subitem {
+  padding-left: 25px;
+  color: black;
+}
+
+.side-bar-subitem:hover {
+  background-color: #94C1FA;
+}

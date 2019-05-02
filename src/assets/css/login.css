@@ -1,0 +1,19 @@
+.login-page {
+  display: flex;
+  flex-direction: row!important;
+  min-height: 80vh;
+  align-items: center!important;
+  box-sizing: border-box;
+}
+
+.login-layout {
+  border-radius: .25rem;
+  background-color: #fff;
+  min-width: 0;
+  padding: 40px;
+  border: 1px solid silver;
+  min-width: 400px;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+}

@@ -1,0 +1,21 @@
+.lay-cate {
+  background-color: #F3FAFA;
+}
+
+.lay-cate > .title {
+  padding: 20px 10px;
+  font-weight: bold;
+}
+
+.lay-cate > .title > span {
+  font-weight: 300;
+}
+
+.lay-cate-menu {
+  text-align: center;
+}
+
+.lay-cate-menu > .menu-item {
+  width: 100%;
+  padding: 20px 0px;
+}

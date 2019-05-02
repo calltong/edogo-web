@@ -1,0 +1,44 @@
+.pro-user-title {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.pro-user-title-img {
+  width: 100%;
+  max-height: 140px;
+  border-radius: 10px;
+}
+
+.pro-user-title-detail {
+
+}
+
+.pro-user-title-detail > h4 {
+
+}
+
+.pro-user-title-detail > .detail {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.pro-user-info-about {
+  font-size: 16px;
+}
+
+.pro-user-info-skill {
+  margin-top: 2px;
+  margin-right: 2px;
+  font-size: 12px;
+}
+
+.user-post-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.user-video-img {
+  width: 100%;
+  border-radius: 5px;
+}

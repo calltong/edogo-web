@@ -1,0 +1,40 @@
+
+.room {
+  min-height: 690px;
+}
+
+.room-menu {
+  margin-top: 5px;
+}
+
+.room-menu-person {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0px 0px;
+  margin-bottom: 10px;
+}
+
+.room-menu-person > .status {
+  padding: 10px 0px;
+}
+
+.room-menu-person-img {
+  width: 100%;
+  border-radius: 0px;
+}
+
+.room-work-menu {
+  border-radius: 5px;
+}
+
+.room-work-menu > button {
+  font-size: 12px;
+}
+
+.room-work {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 2px;
+}

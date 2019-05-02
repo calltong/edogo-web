@@ -1,0 +1,10 @@
+version: '3'
+services:
+  edogo-web:
+    image: nginx
+    container_name: edogo-web
+    ports:
+      - "8100:80"
+    volumes:
+      - ../build:/var/www
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf

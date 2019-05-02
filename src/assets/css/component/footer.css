@@ -1,0 +1,56 @@
+.footer-body {
+  color: white;
+  background-color: #26548F;
+  padding: 20px 80px;
+  width: 100%;
+  min-height: 200px;
+}
+
+.footer-link, .footer-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-company {
+  color: #F0F0F0;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.footer-main {
+  color: white;
+}
+
+.footer-main > .title {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.footer-main > .description {
+  font-size: 14px;
+}
+
+.footer-home > ul {
+  list-style-type: none;
+}
+
+.footer-home > ul > li {
+  margin-bottom: 4px;
+}
+
+.footer-social {
+}
+
+.footer-social > .title {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.footer-social > .icon {
+  font-size: 26px;
+}
+
+.footer-social > .icon > i {
+  margin-right: 10px;
+}

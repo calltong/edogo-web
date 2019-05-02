@@ -1,0 +1,71 @@
+.lay-bc {
+  background-color: white;
+}
+
+.lay-bc > .title {
+  padding: 20px 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.lay-bc > .title > span {
+  font-weight: 300;
+}
+
+.lay-bc-menu {
+  margin-left: 26%;
+  margin-bottom: 40px;
+}
+
+.lay-bc-menu > .menu-item {
+  flex: 0 0 10%;
+  text-align: center;
+}
+
+.lay-bc-menu > .menu-item > .item {
+  padding: 5px;
+  color: #959494;
+}
+
+.lay-bc-menu > .menu-item > .item-active {
+  padding: 5px;
+  color: black;
+  border-bottom: 2px solid #26548F;
+}
+
+.lay-bc-course {
+  border: 1px solid #E4E5E4;
+  border-radius: 5px;
+  text-align: center;
+  min-height: 310px;
+}
+
+.lay-bc-course > .title-img {
+  height: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.lay-bc-course > a > .profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 49%;
+  margin: -38px auto 0px;
+  text-align: center;
+}
+
+.lay-bc-course > .content {
+  padding: 10px;
+}
+
+.lay-bc-course > .content > .title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.lay-bc-course > .content > .name {
+  font-size: 12px;
+  text-align: left;
+}

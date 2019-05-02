@@ -1,0 +1,18 @@
+.text-error {
+  color: #FF3A33;
+}
+
+.text-res-error {
+  color: #FF3A33;
+  font-size: 14px;
+}
+
+.text-success {
+  color: #5DF97E;
+}
+
+.text-countdown {
+  background-color: #26548F;
+  min-width: 40px;
+  font-size: 20px;
+}

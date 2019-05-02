@@ -1,0 +1,183 @@
+
+.btn {
+  background-color: white;
+  border: 1px solid #7F8080;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #26548F;
+  border-color: #26548F;
+}
+
+.btn-primary:hover {
+  background-color: #26548F;
+  border-color: #26548F;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #474747;
+  background-color: #D1D0D0;
+  border: 0px solid #D1D0D0;
+}
+
+.btn-update {
+  color: #000000;
+  background-color: #B5E5B4;
+}
+
+.btn-update:hover {
+  color: #000000;
+  background-color: #B5E5B4;
+}
+
+.btn-create {
+  color: #fff;
+  background-color: #454388;
+  border-color: #454388;
+}
+
+.btn-create:hover {
+  color: #fff;
+  background-color: #38366e;
+  border-color: #343266;
+}
+
+.btn-edit {
+  color: #000000;
+  background-color: #FFFFFF;
+  border-color: #ACACAC;
+}
+
+.btn-edit:hover {
+  color: #000000;
+  background-color: #F7F7F7;
+  border-color: #343266;
+}
+
+.btn-find {
+  color: #fff;
+  background-color: #454388;
+  border-color: #454388;
+}
+
+.btn-find:hover {
+  background-color: #38366e;
+  border-color: #343266;
+}
+
+.btn-download {
+  color: #000;
+  background-color: #fff;
+  border-color: #EBEBEB;
+}
+
+.btn-download:hover {
+  background-color: #D0CECE;
+  border-color: #959393;
+}
+
+.btn-facebook {
+  color: white;
+  background-color: #3c5a93;
+  border-color: #3c5a93;
+}
+
+.btn-facebook:hover {
+  background-color: #3c5a93;
+  border-color: #3c5a93;
+}
+
+.btn-google {
+  color: black;
+  background-color: white;
+  border-color: #454388;
+}
+
+.btn-google:hover {
+  background-color: white;
+  border-color: #343266;
+}
+
+.btn-image {
+  color: #303030;
+  background-color: #ffffff;
+  border: 1px solid #A7A6A6;
+  border-radius: 4px;
+}
+
+.btn-profile {
+  color: #303030;
+  background-color: #ffffff;
+  border: 1px solid #A7A6A6;
+  border-radius: 4px;
+}
+
+.btn-datepicker {
+  color: #fff;
+  background-color: #216ba5;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.btn-menu-active {
+  margin-right: 2px;
+  border: 1px solid #7F8080;
+  background-color: #26548F;
+  color: white;
+  width: 100px;
+}
+
+.btn-menu {
+  margin-right: 2px;
+  border: 1px solid #7F8080;
+  background-color: white;
+  color: black;
+  width: 100px;
+}
+
+.btn-menu:hover {
+  background-color: white;
+  border-color: #343266;
+}
+
+.btn-fullsize {
+  width: 100%;
+}
+
+.btn-m-size {
+  width: 120px;
+}
+
+.btn-s-size {
+  width: 60px;
+}
+
+.btn-ontable {
+  width: 120px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.btn-s-font {
+  font-size: 11px;
+}
+
+.btn-m-font {
+  font-size: 15px;
+}
+
+.btn-l-font {
+  font-size: 18px;
+}
+
+.link {
+  color: black;
+}
+
+@media screen and (max-width: 425px) {
+  .btn-ontable {
+    width: 90px;
+    margin-bottom: 5px;
+  }
+}

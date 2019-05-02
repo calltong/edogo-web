@@ -1,0 +1,21 @@
+.reg-step {
+  background-color: #FCFBFB;
+  color: black;
+  border: 1px solid #E4E5E4;
+  border-radius: 160px;
+  padding: 20px 10px;
+  text-align: center;
+  width: 55%;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+.reg-step-active {
+  background-color: #26548F;
+  color: white;
+}
+
+.reg-step-main {
+  border-radius: 10px;
+  font-size: 18px;
+}
