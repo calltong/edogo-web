@@ -43,14 +43,13 @@ export default class ColorMenu extends Component {
       )
     })
 
-    let css = {
+    const css = {
       backgroundColor: value,
       width: '50px',
       minHeight: '18px',
       marginTop: '5px',
       marginLeft: '6px',
     }
-
     return (
       <Dropdown
         nav

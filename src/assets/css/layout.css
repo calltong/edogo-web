@@ -1,21 +1,17 @@
-
 body {
-  background-color: #F2F6F7;
-}
-
-.app-body {
-  padding: 10px 15px !important;
-  min-height: 540px;
+  background: rgb(242,246,247);
+  background: radial-gradient(circle, rgba(242,246,247,1) 0%, rgba(232,237,240,1) 50%, rgba(242,246,247,1) 100%);
 }
 
 .app-content {
-  padding: 30px 60px;
+  padding: 20px 50px;
 }
 
 .layout-form {
   background-color: white;
   border-radius: 5px;
   padding: 20px;
+  margin-top: 20px;
 }
 
 .image-title {

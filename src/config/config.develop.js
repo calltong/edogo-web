@@ -7,7 +7,7 @@ const config = {
   gmail: {
     client_id: '331249496316-ikhvvnhmrv459siqfk6uc8e5qmtkeq6h.apps.googleusercontent.com',
   },
-  service: {
+  api: {
     main: 'http://127.0.0.1:3004/api',
   },
   tcp: {

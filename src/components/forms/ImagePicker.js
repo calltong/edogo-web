@@ -3,17 +3,21 @@ import DropZone from 'react-dropzone'
 
 export default class ImagePicker extends Component {
   render() {
+    let { title, src, invalid } = this.props
     let width = '100%'
     let remove = <div />
+    let borderColor
+    if (invalid) borderColor = 'red'
+
     let content = (
-      <button type="button" className="btn btn-image" style={{ width, minHeight: '100px' }}>
-        <i className="fa fa-plus" /> {this.props.title ? this.props.title : 'Add Image' }
+      <button type="button" className="btn btn-image" style={{ width, borderColor, minHeight: '100px' }}>
+        <i className="fa fa-plus" /> { title ? title : 'Add Image' }
       </button>
     )
 
-    if (this.props.src) {
+    if (src) {
       content = (
-        <img alt="" src={this.props.src} style={{ width, border: '1px solid #ccc' }} />
+        <img alt="" src={src} style={{ width, borderColor, border: '1px solid #ccc' }} />
       )
 
       remove = (

@@ -3,29 +3,6 @@ import { Dropdown, DropdownToggle,
   DropdownMenu, DropdownItem,
   Container, Row, Col } from 'reactstrap'
 
-  const size_list = [
-    {
-      label: 1,
-      value: 2,
-    },
-    {
-      label: 2,
-      value: 4,
-    },
-    {
-      label: 3,
-      value: 6,
-    },
-    {
-      label: 4,
-      value: 8,
-    },
-    {
-      label: 5,
-      value: 10,
-    },
-  ]
-
 export default class LineMenu extends Component {
   constructor(props) {
     super(props)
@@ -37,7 +14,8 @@ export default class LineMenu extends Component {
   }
 
   onChange(item) {
-    if (this.props.onChange) this.props.onChange('size', item.value)
+    let { onChange } = this.props
+    if (onChange) onChange('size', item.value)
   }
 
   toggle() {
@@ -91,3 +69,26 @@ export default class LineMenu extends Component {
     )
   }
 }
+
+const size_list = [
+  {
+    label: 1,
+    value: 2,
+  },
+  {
+    label: 2,
+    value: 4,
+  },
+  {
+    label: 3,
+    value: 6,
+  },
+  {
+    label: 4,
+    value: 8,
+  },
+  {
+    label: 5,
+    value: 10,
+  },
+]

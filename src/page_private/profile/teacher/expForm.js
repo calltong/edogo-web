@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import {
   Row, Col,
-  Form, FormGroup, Label,
-  Input, FormFeedback } from 'reactstrap'
+  Form, Input } from 'reactstrap'
 
-import Select from 'react-select'
-
+import { DropdownList, FormGroup } from '../../../components/forms'
 import { full_month, full_year } from '../../../constant'
 import { helper } from '../../../utils/helper'
 
@@ -43,12 +41,12 @@ export default class ExpForm extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  setValue(val) {
+  setValue = (val) => {
     let data = _.cloneDeep(val)
     this.setState({ data })
   }
 
-  onChange(evt) {
+  onChange = (evt) => {
     let name = evt.target.name
     let value = evt.target.value
     let { data } = this.state
@@ -56,13 +54,13 @@ export default class ExpForm extends Component {
     this.setState({ data })
   }
 
-  chDuration(name, item) {
+  chDuration = (name, item) => {
     let { data } = this.state
     data.duration[name] = item.value
     this.setState({ data })
   }
 
-  async onConfirm() {
+  onConfirm = async () => {
     let { data } = this.state
     let checkList = ['position', 'company']
     let durationList = ['start_month', 'start_year', 'end_month', 'end_year']
@@ -86,7 +84,7 @@ export default class ExpForm extends Component {
     }
   }
 
-  onCancel() {
+  onCancel = () => {
     let cancel = this.props.onCancel
     if (cancel) {
       cancel()
@@ -94,7 +92,7 @@ export default class ExpForm extends Component {
     }
   }
 
-  reset() {
+  reset = () => {
     let val = _.cloneDeep(origin)
     this.setState(val)
   }
@@ -103,102 +101,80 @@ export default class ExpForm extends Component {
     let { data, valid } =  this.state
     let { position, company, duration } = data
 
-    let mStart = full_month.find((item) => {
-      return item.value === duration.start_month
-    })
-
-    let yStart = full_year.find((item) => {
-      return item.value === duration.start_year
-    })
-
-    let mEnd = full_month.find((item) => {
-      return item.value === duration.end_month
-    })
-
-    let yEnd = full_year.find((item) => {
-      return item.value === duration.end_year
-    })
     return (
       <Form>
         <h4>Create Your Experience</h4>
         <Row>
           <Col md="12">
-            <FormGroup>
-              <Label>Position</Label>
+            <FormGroup label="Position">
               <Input
                 name="position"
                 placeholder="your position"
                 invalid={valid.position}
                 value={position}
                 onChange={this.onChange} />
-              <FormFeedback>please fill your position</FormFeedback>
             </FormGroup>
           </Col>
           <Col md="12">
-            <FormGroup>
-              <Label>Company</Label>
+            <FormGroup label="Company">
               <Input
                 name="company"
                 placeholder="your company"
                 invalid={valid.company}
                 value={company}
                 onChange={this.onChange} />
-              <FormFeedback>please fill your company</FormFeedback>
             </FormGroup>
           </Col>
         </Row>
 
         <Row>
           <Col md="6">
-            <FormGroup>
-              <Label>From</Label>
-              <Select
+            <FormGroup label="From">
+              <DropdownList
+                name="start_month"
                 placeholder="Month"
-                value={mStart}
-                options={full_month}
-                onChange={this.chDuration.bind(this, 'start_month')} />
+                value={duration.start_month}
+                menus={full_month}
+                onChange={this.chDuration} />
             </FormGroup>
           </Col>
           <Col md="6">
             <FormGroup>
-              <Label>&nbsp;</Label>
-              <Select
+              <DropdownList
+                name="start_year"
                 placeholder="Year"
-                value={yStart}
-                options={full_year}
-                onChange={this.chDuration.bind(this, 'start_year')} />
+                value={duration.start_year}
+                menus={full_year}
+                onChange={this.chDuration} />
             </FormGroup>
           </Col>
         </Row>
 
         <Row>
           <Col md="6">
-            <FormGroup>
-              <Label>To</Label>
-              <Select
+            <FormGroup label="To">
+              <DropdownList
+                name="end_month"
                 placeholder="Month"
-                value={mEnd}
-                options={full_month}
-                onChange={this.chDuration.bind(this, 'end_month')} />
+                value={duration.end_month}
+                menus={full_month}
+                onChange={this.chDuration} />
             </FormGroup>
           </Col>
           <Col md="6">
             <FormGroup>
-              <Label>&nbsp;</Label>
-              <Select
+              <DropdownList
+                name="end_year"
                 placeholder="Year"
-                value={yEnd}
-                options={full_year}
-                onChange={this.chDuration.bind(this, 'end_year')} />
+                value={duration.end_year}
+                menus={full_year}
+                onChange={this.chDuration} />
             </FormGroup>
           </Col>
         </Row>
 
         <br />
-
-        <ConfirmSection
-          onConfirm={this.onConfirm}
-          onCancel={this.onCancel} />
+        <ConfirmSection onConfirm={this.onConfirm} onCancel={this.onCancel} />
       </Form>
     )
   }

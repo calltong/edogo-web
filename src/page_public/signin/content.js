@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import {
-  Container, Row, Col,
-  Form } from 'reactstrap'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { Row, Col, Form } from 'reactstrap'
 
 import {
   SigninBtn, CloseBtn,
@@ -10,6 +10,7 @@ import {
 
 import { Loading } from '../../components/loading'
 import InputGroup from '../../components/forms/InputGroup'
+import { Title } from '../../components/layout'
 import { helper } from '../../utils/helper'
 import { history } from '../../utils/history'
 
@@ -43,13 +44,11 @@ export class Content extends Component {
   }
 
   async onEmail() {
-    console.log('on email')
     let { email, password, valid } = this.state
 
     if (email === '') valid.email = true
     else if (password === '') valid.password = true
     else {
-      console.log('p:',this.props)
       await this.props.onEmail({ email, password })
       return
     }
@@ -57,23 +56,21 @@ export class Content extends Component {
   }
 
   async onGmail(res) {
-    //let { profileObj } = res
-    //let { googleId, email } = profileObj
     await this.props.onGmail(res)
   }
 
   render() {
-    let { status, message, email, password, valid } = this.state
+    let { loading, email, password, valid } = this.state
+    let { error } = this.props
     let text = { textAlign: 'center' }
-    let btn = { marginBottom: '2px' }
+    let btn = { marginBottom: '4px' }
 
-    let error
-    if (status === 'error') error = (<p className="text-res-error">{message}</p>)
-
+    let errText
+    if (error) errText = (<p className="text-res-error">{error}</p>)
     return (
-      <Container className="layout-form">
-        <Loading dialog loading={this.state.loading} />
-        <h4 style={text}>Welcome to sign in</h4>
+      <div>
+        <Loading dialog loading={loading} />
+        <Title>Welcome to login</Title>
         <br />
         <Row>
           <Col md="12">
@@ -111,7 +108,7 @@ export class Content extends Component {
             </Form>
           </Col>
           <Col md="12">
-            {error}
+            {errText}
             <SigninBtn
               className="btn-fullsize"
               style={btn}
@@ -122,10 +119,19 @@ export class Content extends Component {
               className="btn-fullsize"
               onClick={this.props.onClose} />
           </Col>
+          <Col md="12">
+            <ResetPassword>
+              <Link to="" onClick={this.props.onResetPassword}>Forgot your password?</Link>
+            </ResetPassword>
+          </Col>
         </Row>
-      </Container>
+      </div>
     )
   }
 }
+
+const ResetPassword = styled.div`
+  margin-top: 10px;
+`
 
 export default inject('member')(observer(Content))

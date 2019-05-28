@@ -18,6 +18,8 @@ export class Signup extends Component {
 
     this.onEmail = this.onEmail.bind(this)
     this.onGmail = this.onGmail.bind(this)
+
+    this.closeDialog = this.closeDialog.bind(this)
   }
 
   async componentDidMount() {
@@ -28,10 +30,9 @@ export class Signup extends Component {
     try {
       this.setState({ loading: true })
       await this.props.member.registerByEmail(params)
-      this.setState({ loading: false})
-      history.push('../../pv/member/profile')
+      this.setState({ status: 'completed', loading: false })
     } catch(e) {
-      this.setState({ status: 'error', message: e.message })
+      this.setState({ status: 'error', loading: false, message: e.message })
     }
   }
 
@@ -39,8 +40,19 @@ export class Signup extends Component {
     try {
       this.setState({ loading: true })
       await this.props.member.registerByGmail(params)
-      this.setState({ loading: false})
-      history.push('../../pv/member/profile')
+      this.setState({ loading: false })
+      await this.closeDialog('../../pv/member/profile')
+    } catch(e) {
+      this.setState({ status: 'error', loading: false, message: e.message })
+    }
+  }
+
+  async closeDialog(uri) {
+    try {
+      let { onClose } = this.props
+      if (onClose) await onClose()
+
+      if (uri) history.push(uri)
     } catch(e) {
       this.setState({ status: 'error', message: e.message })
     }
@@ -49,13 +61,14 @@ export class Signup extends Component {
   render() {
     let { loading, status, message } = this.state
     let page
-    if (status === 'success') {
+    if (status === 'completed') {
       page = (<Success onClose={this.props.onClose} />)
     } else {
       page = (
         <Content
           onEmail={this.onEmail}
           onGmail={this.onGmail}
+          onClose={this.closeDialog}
           error={status === 'error' ? message : undefined} />
       )
     }

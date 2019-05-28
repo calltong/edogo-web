@@ -8,13 +8,13 @@ import { Link } from '../../components/link'
 export default class Success extends Component {
   constructor() {
     super()
-    this.onProfile = this.onProfile.bind(this)
+    this.onNext = this.onNext.bind(this)
   }
 
-  onProfile() {
-    history.push('../pv/member/profile')
+  async onNext() {
     let { onClose } = this.props
-    if (onClose) onClose()
+    if (onClose) await onClose()
+    history.push('../../../../login')
   }
 
   render() {
@@ -23,16 +23,16 @@ export default class Success extends Component {
     let { id } = this.props
     return (
       <div style={pad}>
-        <h3 style={css}>Sign up completed</h3>
+        <h3 style={css}>Check your comfirmation email</h3>
         <br />
-        <p style={css}>Thank you for sign up with Edogo</p>
+        <p style={css}>Thank you for signup with Edogo</p>
         <br />
         <Row>
           <Col md="6">
             <Btn
-              onClick={this.onProfile}
+              onClick={this.onNext}
               className="btn-fullsize">
-              Edit Profile
+              Go to login
             </Btn>
           </Col>
           <Col md="6">

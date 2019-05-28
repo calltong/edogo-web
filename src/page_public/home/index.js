@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
 import Title from '../layout/Title'
-import BrowseCourse from '../layout/BrowseCourse'
-import Category from '../layout/Category'
+import Feature from '../layout/Feature'
+import PopularCourse from '../layout/PopularCourse'
 
 export default class Home extends Component {
   render() {
     return (
       <div>
         <Title />
-        <BrowseCourse />
-        <Category />
+        <Feature />
+        <PopularCourse />
       </div>
     )
   }

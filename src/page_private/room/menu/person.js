@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap'
+import styled from 'styled-components'
 
 import { helper } from '../../../utils/helper'
 
@@ -121,7 +122,7 @@ export default class Person extends Component {
       padding: '0px 2px',
     }
     return (
-      <div className="room-menu-person">
+      <Section>
         <Status {...this.props} />
         <Row >
           <Col md="12">
@@ -138,10 +139,27 @@ export default class Person extends Component {
             <i style={css} className={ status.audio ? 'fas fa-volume-up' : 'fas fa-volume-off'} />
           </Col>
         </Row>
-      </div>
+      </Section>
     )
   }
 }
+
+const Section = styled.div`
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0px 0px;
+  margin-bottom: 10px;
+
+  .status {
+    padding: 10px 0px;
+  }
+`
+
+const UserImg = styled.img`
+  width: 100%;
+  border-radius: 0px;
+`
 
 /*
 export default class Person extends Component {
@@ -155,7 +173,7 @@ export default class Person extends Component {
         <Status {...this.props} />
         <Row >
           <Col md="12">
-            <img className="room-menu-person-img" src={data.img} />
+            <UserImg src={data.img} />
           </Col>
         </Row>
         <Row style={css}>

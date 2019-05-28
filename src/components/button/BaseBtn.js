@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 
 export default class BaseBtn extends Component {
   render() {
+    let { noIcon, noText, invalid } = this.props
     let icon
     let text
     let valid = ''
-    if (this.props.noIcon === undefined) icon = <i className={this.props.icon} />
-    if (this.props.noText === undefined) text = this.props.children || this.props.text
-    if (this.props.invalid) valid = 'border-invalid'
+    if (noIcon === undefined) icon = <i className={this.props.icon} />
+    if (noText === undefined) text = this.props.children || this.props.text
+    if (invalid) valid = 'border-invalid'
 
     let content
     if (icon && text) content = <div>{icon} {text}</div>

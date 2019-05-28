@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 
 import { RetryBtn } from './button'
+import { Page, Title } from './layout'
 
 export default class SomeError extends Component {
 
   render() {
     let text = { textAlign: 'center' }
-    let title = this.props.title || 'Something wrong'
-    let detail = this.props.detail || 'Please wait a moment and retry again'
-    let message = this.props.message
+    let {
+      title = 'Something wrong',
+      detail = 'Sorry has some error and retry again',
+      message, onRetry } = this.props
 
     let len = detail.length
     if (len > 0) {
@@ -18,11 +20,11 @@ export default class SomeError extends Component {
     }
 
     let retry
-    if (this.props.onRetry) {
+    if (onRetry) {
       retry = (
         <Row>
           <Col md={{size: 2, offset: 5}} sm={{size: 3, offset: 3}}>
-            <RetryBtn className="btn-fullsize" onClick={this.props.onRetry} />
+            <RetryBtn className="btn-fullsize" onClick={onRetry} />
           </Col>
         </Row>
       )
@@ -38,8 +40,8 @@ export default class SomeError extends Component {
       )
     }
     return (
-      <Container className="layout-form">
-        <h4 style={text}>{title}</h4>
+      <Page>
+        <Title style={text}>{title}</Title>
         <br />
         <h5 style={text}>{detail}</h5>
         <br />
@@ -47,7 +49,7 @@ export default class SomeError extends Component {
         <p style={text}><i className="fas fa-exclamation-circle layout-form-icon text-error" /></p>
         <br />
         {retry}
-      </Container>
+      </Page>
     )
   }
 }

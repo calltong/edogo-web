@@ -13,6 +13,12 @@ export class Errors {
   lunch({ message }) {
     throw { message }
   }
+
+  isError(val, { message }) {
+    if (val === true) {
+      throw { message }
+    }
+  }
 }
 
 export const error = new Errors()

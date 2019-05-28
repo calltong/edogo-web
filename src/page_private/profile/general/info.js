@@ -3,11 +3,12 @@ import { observer, inject } from 'mobx-react'
 import moment from 'moment'
 import {
   Container, Row, Col, Form,
-  FormGroup, Label, Input, FormFeedback } from 'reactstrap'
-import DatePicker from 'react-datepicker'
+  Input } from 'reactstrap'
 
-// import DatePicker from '../../../components/picker/DatePicker'
-import ProfileImg from './img'
+import { DatePicker } from 'antd'
+import { DropdownList, FormGroup } from '../../../components/forms'
+
+import ProfileImg from './ProfileImg'
 
 export class Info extends Component {
   constructor() {
@@ -15,23 +16,20 @@ export class Info extends Component {
     this.state = {
       loading: false,
     }
-
-    this.chValue = this.chValue.bind(this)
-    this.chBirthday = this.chBirthday.bind(this)
   }
 
   componentWillReceiveProps() {
     this.forceUpdate()
   }
 
-  chValue(evt) {
+  chValue = (evt) => {
     let name = evt.target.name
     let value = evt.target.value
     this.doc.profile[name] = value
     this.props.member.setInfo(this.doc)
   }
 
-  chBirthday(val) {
+  chBirthday = (val) => {
     this.doc.profile.birthday = val
     this.props.member.setInfo(this.doc)
   }
@@ -39,7 +37,6 @@ export class Info extends Component {
   render() {
     let doc = this.props.member.toJS().info
     let { profile = {} } = doc
-    console.log('profile:', profile)
     let valid= this.props.valid
     this.doc = doc || {}
     return (
@@ -52,23 +49,20 @@ export class Info extends Component {
             <Form>
               <Row>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Name</Label>
+                  <FormGroup label="Name">
                     <Input
                       name="name"
-                      placeholder="your name"
+                      placeholder="name"
                       value={profile.name}
                       invalid={valid.name}
                       onChange={this.chValue} />
-                    <FormFeedback>please fill name</FormFeedback>
                   </FormGroup>
                 </Col>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Surname</Label>
+                  <FormGroup label="Surname">
                     <Input
                       name="surname"
-                      placeholder="your surname"
+                      placeholder="surname"
                       value={profile.surname}
                       invalid={false}
                       onChange={this.chValue} />
@@ -78,24 +72,23 @@ export class Info extends Component {
 
               <Row>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Nickname</Label>
+                  <FormGroup label="Nickname">
                     <Input
                       name="nickname"
-                      placeholder="your nickname"
+                      placeholder="fill nickname"
                       value={profile.nickname}
                       invalid={valid.nickname}
                       onChange={this.chValue} />
-                    <FormFeedback>please fill nickname</FormFeedback>
+
                   </FormGroup>
                 </Col>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Birthday</Label>
+                  <FormGroup label="Birthday">
                     <div>
                       <DatePicker
+                        allowClear
                         placeholderText="dd/mm/yyyy"
-                        selected={moment()}
+                        defaultValue={moment()}
                         onChange={this.chBirthday} />
                     </div>
                   </FormGroup>
@@ -104,23 +97,20 @@ export class Info extends Component {
 
               <Row>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Email</Label>
+                  <FormGroup label="Email">
                     <Input
                       disabled
                       type="email"
                       name="email"
-                      placeholder="your email"
+                      placeholder="email"
                       value={profile.email} />
-                    <FormFeedback>please fill email</FormFeedback>
                   </FormGroup>
                 </Col>
                 <Col md="6">
-                  <FormGroup>
-                    <Label>Phone number</Label>
+                  <FormGroup label="Phone number">
                     <Input
                       name="phone"
-                      placeholder="your phone number"
+                      placeholder="phone number"
                       value={profile.phone}
                       onChange={this.chValue} />
                   </FormGroup>

@@ -6,19 +6,18 @@ import { SaveBtn } from '../../../components/button'
 import { Loading } from '../../../components/loading'
 import SomeError from '../../../components/SomeError'
 
-import DataList from './list'
-import DataDetail from './detail'
+import ProfileView from '../ProfileView'
+import CourseList from './list'
 
 export class Course extends Component {
   constructor() {
     super()
     this.state = {
       loading: false,
-      error: '',
+      status: '',
+      message: '',
     }
 
-    this.goToList = this.goToList.bind(this)
-    this.onSave = this.onSave.bind(this)
     this.onLoad = this.onLoad.bind(this)
   }
 
@@ -27,54 +26,37 @@ export class Course extends Component {
   }
 
   async onLoad() {
-    this.setState({ loading: true })
-    let res = await this.props.course.getList()
-    let error = ''
-    if (res.err) error = res.err
-
-    this.setState({ loading: false, error })
-  }
-
-  async onSave() {
-    this.setState({ loading: true })
-    await this.props.course.save()
-    this.setState({ loading: false })
-  }
-
-  goToList() {
-    let doc = this.props.course.toJS().owner
-    if (doc.mode === 'create' || doc.mode === 'edit') this.props.course.setMode('display')
+    try {
+      this.setState({ loading: true, status: '' })
+      await this.props.course.getList()
+      this.setState({ loading: false })
+    } catch(e) {
+      this.setState({ loading: false, status: 'fail_load', message: e.message })
+    }
   }
 
   render() {
-    let { loading, error } = this.state
-    let doc = this.props.course.toJS().owner
-    let navigator
+    let { loading, status, message } = this.state
     let content
-    if (error === '') {
-      content = <DataDetail />
-      if (doc.mode === 'create') {
-        navigator = <span> -> Create Course</span>
-      } else if (doc.mode === 'edit') {
-        navigator = <span> -> Edit Course</span>
-      } else {
-        content = <DataList />
-      }
+    if (status === 'fail_load') {
+      content = <SomeError message={message} onRetry={this.onLoad} />
     } else {
-      content = <SomeError onRetry={this.onLoad} />
+      content = <CourseList />
     }
 
     return (
-      <Container>
-        <Loading dialog loading={loading} />
-        <Row>
-          <Col md="12">
-            <label onClick={this.goToList}>Course List</label> {navigator}
-          </Col>
-        </Row>
-        <hr />
-        {content}
-      </Container>
+      <ProfileView title="My Course">
+        <Container>
+          <Loading dialog loading={loading} />
+          <Row>
+            <Col md="12">
+              <label>Course List</label>
+            </Col>
+          </Row>
+          <hr />
+          {content}
+        </Container>
+      </ProfileView>
     )
   }
 }

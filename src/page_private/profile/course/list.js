@@ -4,13 +4,13 @@ import { Row, Col } from 'reactstrap'
 
 import { EditBtn, Btn } from '../../../components/button'
 
-// import history from '../../../utils/history'
+import history from '../../../utils/history'
 import { format } from '../../../utils/format'
 
 import TitleSection from '../section/title'
 import AddSection from '../section/add'
 
-export class DataList extends Component {
+export class CourseList extends Component {
   constructor() {
     super()
     this.state = {
@@ -21,16 +21,17 @@ export class DataList extends Component {
   }
 
   onAdd() {
-    this.props.course.setMode({ mode: 'create' })
+    history.push("../../pv/profile/course/create")
   }
 
-  onEdit(index) {
-    this.props.course.setMode({ mode: 'edit', index })
+  onEdit(id) {
+    history.push(`../../pv/profile/course/${id}/edit`)
   }
 
   render() {
+    let ccsItem = { textAlign: 'right' }
     let list = this.props.course.toJS().owner.list
-    let cssBtn = {marginBottom: '2px'}
+    let cssBtn = { marginBottom: '2px' }
 
     let contents = list.map((item, index) => {
       let detail = item.detail
@@ -61,11 +62,11 @@ export class DataList extends Component {
             <Col md="4">
               {duration}
             </Col>
-            <Col md="2" style={{ textAlign: 'right' }}>
+            <Col md="2" style={ccsItem}>
               <EditBtn
                 noText
                 className="btn-s-size btn-s-font"
-                onClick={this.onEdit.bind(this, index)} />
+                onClick={this.onEdit.bind(this, item._id)} />
             </Col>
           </Row>
           <hr />
@@ -96,4 +97,4 @@ export class DataList extends Component {
   }
 }
 
-export default inject('course')(observer(DataList))
+export default inject('course')(observer(CourseList))

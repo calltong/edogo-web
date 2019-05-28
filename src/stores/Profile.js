@@ -4,6 +4,7 @@ import { config } from '../config'
 import { http } from '../connection/http'
 import { resp } from '../utils/resp'
 import { helper } from '../utils/helper'
+import { error } from '../utils/error'
 
 import constant from './constant'
 
@@ -16,23 +17,14 @@ export class Profile extends BaseStore {
   }
 
   async getDoc({ id }) {
-    try {
-      this.doc = _.cloneDeep(constant.member)
+    this.doc = _.cloneDeep(constant.member)
 
-      let url = `${config.api.content}/v1/member/info/${id}`
-      let res = await http.get(url)
-      console.log('get doc:', res)
-      if (res.statusCode !== 200) {
-        let msg = res.body.message
-        return { err: msg }
-      }
+    let url = `${config.api.main}/v1/public/member/${id}/info`
+    let res = await http.get(url)
+    console.log('get doc:', res)
+    error.isError(res.statusCode !== 200, { message: res.body.message })
 
-      let data = res.body.data
-      this.doc = data
-      return  { data }
-    } catch (e) {
-      return { err: 'something wrong'}
-    }
+    this.doc = res.body
   }
 }
 

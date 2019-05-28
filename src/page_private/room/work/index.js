@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-// import { Container, Row, Col } from 'reactstrap'
+import styled from 'styled-components'
 
 import Whiteboard from './whiteboard'
 import Editor from './editor'
@@ -24,11 +24,17 @@ export class WorkContent extends Component {
         content = <div />
     }
     return (
-      <div className="room-work">
+      <Section>
         {content}
-      </div>
+      </Section>
     )
   }
 }
+
+const Section = styled.div`
+  background-color: white;
+  margin-top: 2px;
+`
+
 
 export default inject('session')(observer(WorkContent))

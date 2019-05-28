@@ -46,6 +46,7 @@ export class Member extends BaseStore {
   constructor() {
     super()
     this.observable({
+      token_checking: false,
       user: _.cloneDeep(origin_user),
       info: _.cloneDeep(origin_info),
     })
@@ -59,7 +60,8 @@ export class Member extends BaseStore {
     let auth = storage.load('authentication')
     if (auth && auth.token) {
       await http.setToken(auth.token)
-      this.getProfile()
+
+      await this.getProfile()
     }
   }
 
@@ -84,7 +86,7 @@ export class Member extends BaseStore {
       email,
       image_url: imageUrl,
     }
-    let url = `${config.service.main}/v1/public/member/signup/gmail`
+    let url = `${config.api.main}/v1/public/member/signup/gmail`
     let res = await http.post(url, { json })
     let option = {
       gmail: {
@@ -102,12 +104,11 @@ export class Member extends BaseStore {
       email,
       password,
     }
-    let url = `${config.service.main}/v1/public/member/signup/email`
+    let url = `${config.api.main}/v1/public/member/signup/email`
     let res = await http.post(url, { json })
-    let option = {
-      gmail: {}
+    if (res.statusCode !== 200) {
+      error.lunch({ message: res.body.message })
     }
-    this.setLogin('gmail', res, option)
   }
 
   async loginByGmail(params = {}) {
@@ -117,7 +118,7 @@ export class Member extends BaseStore {
       google_id: googleId,
       email,
     }
-    let url = `${config.service.main}/v1/public/member/login/gmail`
+    let url = `${config.api.main}/v1/public/member/login/gmail`
     let res = await http.post(url, { json })
     let option = {
       gmail: {
@@ -134,11 +135,9 @@ export class Member extends BaseStore {
       email,
       password,
     }
-    let url = `${config.service.main}/v1/public/member/login/email`
+    let url = `${config.api.main}/v1/public/member/login/email`
     let res = await http.post(url, { json })
-    let option = {
-      gmail: {}
-    }
+    let option = { gmail: {} }
     this.setLogin('gmail', res, option)
   }
 
@@ -169,7 +168,7 @@ export class Member extends BaseStore {
   }
 
   async getProfile() {
-    let url = `${config.service.main}/v1/member/profile`
+    let url = `${config.api.main}/v1/member/profile`
     let res = await http.get(url, { token: true })
     if (res.statusCode === 200) {
       let { id, register_by, profile } = res.body
@@ -184,7 +183,7 @@ export class Member extends BaseStore {
   }
 
   async getInfo() {
-    let url = `${config.service.main}/v1/member/info`
+    let url = `${config.api.main}/v1/member/info`
     let res = await http.get(url, { token: true })
     if (res.statusCode === 200) {
       this.info = res.body
@@ -199,8 +198,7 @@ export class Member extends BaseStore {
 
   async save() {
     let json = this.toJS().info
-    console.log('save:', json)
-    let url = `${config.service.main}/v1/member/update`
+    let url = `${config.api.main}/v1/member/update`
     let res = await http.post(url, { json, token: true })
     if (res.statusCode === 200) {
       let { id, register_by, profile } = json
@@ -212,6 +210,21 @@ export class Member extends BaseStore {
     } else {
       error.lunch({ message: res.body.message })
     }
+  }
+
+  async updatePassword({ code, email, password }) {
+    let json = {
+      email,
+      password,
+    }
+    let url = `${config.api.main}/v1/public/member/password/${code}`
+    let res = await http.post(url, { json })
+    if (res.statusCode !== 200) {
+      error.lunch({ message: res.body.message })
+    }
+
+    let option = { gmail: {} }
+    this.setLogin('email', res, option)
   }
 }
 

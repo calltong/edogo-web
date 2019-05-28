@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Nav, NavItem } from 'reactstrap'
+import styled from 'styled-components'
 
-import LineMenu from './lineMenu'
-import ColorMenu from './colorMenu'
+import LineMenu from './LineMenu'
+import ColorMenu from './ColorMenu'
 
 const icon_list = [
   { icon: 'fas fa-pen', name: 'pen'},
@@ -15,13 +16,13 @@ const icon_list = [
 
 class MenuIcon extends Component {
   render() {
-    let color = this.props.color ? this.props.color : 'black'
-    let click = this.props.onClick
-    if (this.props.disabled) {
+    let { color='black', onClick, disabled, icon='far fa-square'} = this.props
+    let click = onClick
+    if (disabled) {
       click = undefined
       color = 'grey'
     }
-    let icon = this.props.icon ? this.props.icon : 'far fa-square'
+
     return (
       <NavItem className="nav-link whiteboard-nav-link" onClick={click} >
         <label className="btn whiteboard-menu-btn-icon">
@@ -40,15 +41,16 @@ export default class Menu extends Component {
   }
 
   async chTools(name) {
-    let data = this.props.setting
-    data.tools = name
-    if (this.props.onChange) this.props.onChange(data)
+    let { setting, onChange } = this.props
+    setting.tools = name
+    if (onChange) onChange(setting)
   }
 
   onChange(name, val) {
-    let data = this.props.setting
-    data[name] = val
-    if (this.props.onChange) this.props.onChange(data)
+    let { setting, onChange } = this.props
+    setting.tools = name
+    setting[name] = val
+    if (onChange) onChange(setting)
   }
 
   onImg(evt) {
@@ -63,7 +65,7 @@ export default class Menu extends Component {
   }
 
   render() {
-    const { setting } = this.props
+    const { setting, onUndo, onRedo, onReset, onSave } = this.props
     let tool_choose = icon_list.map((item, index) => {
       let c = item.name === setting.tools ? 'red' : 'black'
       return (
@@ -76,43 +78,50 @@ export default class Menu extends Component {
     })
 
     return (
-      <Nav className="whiteboard-menu">
-        {tool_choose}
+      <Section>
+        <Nav className="whiteboard-menu">
+          {tool_choose}
 
-        <LineMenu
-          value={setting.size}
-          onChange={this.onChange.bind(this)} />
-        <ColorMenu
-          value={setting.color}
-          onChange={this.onChange.bind(this)} />
+          <LineMenu
+            value={setting.size}
+            onChange={this.onChange.bind(this)} />
+          <ColorMenu
+            value={setting.color}
+            onChange={this.onChange.bind(this)} />
 
-        <NavItem className="nav-link whiteboard-nav-link" >
-          <label className="btn whiteboard-menu-btn-icon">
-            <i className="far fa-image" style={{color: 'black'}} />
-            <input
-              type="file"
-              accept="image/*"
-              style={{display: 'none'}}
-              onChange={this.onImg} />
-          </label>
-        </NavItem>
+          <NavItem className="nav-link whiteboard-nav-link" >
+            <label className="btn whiteboard-menu-btn-icon">
+              <i className="far fa-image" style={{color: 'black'}} />
+              <input
+                type="file"
+                accept="image/*"
+                style={{display: 'none'}}
+                onChange={this.onImg} />
+            </label>
+          </NavItem>
 
-        <MenuIcon
-          icon="fas fa-undo"
-          onClick={this.props.onUndo}
-          disabled={this.props.onUndo === undefined} />
-        <MenuIcon
-          icon="fas fa-redo"
-          onClick={this.props.onRedo}
-          disabled={this.props.onRedo === undefined} />
-        <MenuIcon
-          icon="fas fa-broom"
-          onClick={this.props.onReset}
-          disabled={this.props.onReset === undefined} />
-        <MenuIcon
-          icon="fas fa-file-download"
-          onClick={this.props.onSave} />
-      </Nav>
+          <MenuIcon
+            icon="fas fa-undo"
+            onClick={onUndo}
+            disabled={onUndo === undefined} />
+          <MenuIcon
+            icon="fas fa-redo"
+            onClick={onRedo}
+            disabled={onRedo === undefined} />
+          <MenuIcon
+            icon="fas fa-broom"
+            onClick={onReset}
+            disabled={onReset === undefined} />
+          <MenuIcon
+            icon="fas fa-file-download"
+            onClick={onSave} />
+        </Nav>
+      </Section>
     )
   }
 }
+
+const Section = styled.div`
+  border: 0px solid grey;
+  border-bottom-width: 1px;
+`

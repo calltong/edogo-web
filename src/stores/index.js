@@ -4,8 +4,8 @@ import room from './Room'
 import session from './Session'
 import profile from './Profile'
 import course from './Course'
-import register from './Register'
-import category from './Category'
+import verify from './Verify'
+import reset from './Reset'
 
 export default {
   member,
@@ -14,6 +14,6 @@ export default {
   session,
   profile,
   course,
-  register,
-  category,
+  verify,
+  reset,
 }

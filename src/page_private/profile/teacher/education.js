@@ -30,7 +30,7 @@ export class Education extends Component {
 
   async onUpdate(index) {
     await this.setState({ display: true, mode: 'edit', index })
-    let doc = this.props.member.toJS().doc
+    let doc = this.props.member.toJS().info
     let data = doc.teacher
     let item = data.education_list[index]
     await this.form.setValue(item)
@@ -38,15 +38,15 @@ export class Education extends Component {
 
   onConfirm(val) {
     let { mode, index } = this.state
-    let doc = this.props.member.toJS().doc
-    let data = doc.teacher
+    let doc = this.props.member.toJS().info
+
     if (mode === 'edit') {
-      data.education_list[index] = val
+      doc.teacher.education_list[index] = val
     } else {
-      data.education_list.push(val)
+      doc.teacher.education_list.push(val)
     }
 
-    this.props.member.setTeacher(data)
+    this.props.member.setInfo(doc)
     this.setState({display: false})
   }
 
@@ -56,9 +56,8 @@ export class Education extends Component {
 
   render() {
     let { display } = this.state
-    let doc = this.props.member.toJS().doc
+    let doc = this.props.member.toJS().info
     let teacher = doc.teacher
-    this.data = teacher
 
     let contents = teacher.education_list.map((item, index) => {
       let duration = item.duration

@@ -18,12 +18,8 @@ export class Header extends Component {
       find: '',
     }
 
-    this.fnToggle = this.toggle.bind(this)
+    this.onToggle = this.toggle.bind(this)
     this.onFind = this.onFind.bind(this)
-  }
-
-  async componentDidMount() {
-    await this.props.member.verifyToken()
   }
 
   toggle() {
@@ -38,7 +34,7 @@ export class Header extends Component {
     let { find } = this.state
     let menu
     let login = this.props.member.isLogin()
-    console.log('login:', login)
+
     if (login === false) menu = (<LoginMenu />)
     else menu = (<ProfileMenu />)
 
@@ -46,7 +42,7 @@ export class Header extends Component {
       <div>
         <Navbar className="header" expand="md">
           <Link className="header-name navbar-brand" to="/">{config.web.name}</Link>
-          <NavbarToggler className="header-menu" onClick={this.fnToggle}>
+          <NavbarToggler className="header-menu" onClick={this.onToggle}>
             <i className="fas fa-bars" />
           </NavbarToggler>
           <Collapse isOpen={this.state.isOpen} navbar>

@@ -14,7 +14,8 @@ export class Profile extends Component {
     super()
     this.state = {
       loading: false,
-      error: '',
+      status: '',
+      message: '',
     }
   }
 
@@ -23,19 +24,21 @@ export class Profile extends Component {
   }
 
   async onLoad() {
-    this.setState({ loading: true })
+    try {
+      this.setState({ status: '', loading: true })
 
-    let { id } = this.props.match.params
-    let res = await this.props.profile.getDoc({ id })
-    let error
-    if (res.err !== undefined) error = res.err
-
-    this.setState({ loading: false, error })
+      let { id } = this.props.match.params
+      await this.props.profile.getDoc({ id })
+      this.setState({ loading: false })
+    } catch(e) {
+      this.setState({ loading: false, status: 'fail_load', message: e.message })
+    }
   }
+
   render() {
-    let { loading, error } = this.state
+    let { loading, status, message } = this.state
     let content
-    if (error) {
+    if (status === 'fail_load') {
       content = <MemberNotFound />
     } else {
       content = (

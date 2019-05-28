@@ -7,7 +7,9 @@ import { Loading } from '../../../components/loading'
 import SomeError from '../../../components/SomeError'
 import { SaveBtn } from '../../../components/button'
 
+import ProfileView from '../ProfileView'
 import Info from './info'
+import SaveError from '../SaveError'
 
 export class General extends Component {
   constructor() {
@@ -34,11 +36,11 @@ export class General extends Component {
 
   async onLoad() {
     try {
-      this.setState({ loading: true })
+      this.setState({ status: '', loading: true })
       await this.props.member.getInfo()
       this.setState({ loading: false })
     } catch(e) {
-      this.setState({ status: 'error', message: e.message })
+      this.setState({ status: 'fail_load', message: e.message })
     }
   }
 
@@ -51,12 +53,11 @@ export class General extends Component {
       if (res.invalid) {
         this.setState({ valid: res.data })
       } else {
-        this.setState({ loading: true })
+        this.setState({ status: '', loading: true })
         await this.props.member.save()
       }
     } catch(e) {
-      console.log('catch:', e.message)
-      this.setState({ status: 'error', message: e.message })
+      this.setState({ status: 'fail_save', message: e.message })
     }
 
     this.setState({ loading: false })
@@ -64,9 +65,14 @@ export class General extends Component {
 
   render() {
     let { loading, status, message, valid } = this.state
+    let css = { textAlign: 'right' }
     let content
-    if (status === '') {
-      console.log('render:', valid)
+    if (status === 'fail_load') {
+      content = <SomeError message={message} onRetry={this.onLoad} />
+    } else {
+      let msg
+      if (status === 'fail_save') msg = <SaveError message={message} />
+
       content = (
         <div>
           <Info valid={valid} />
@@ -74,22 +80,23 @@ export class General extends Component {
           <br />
           <Row>
             <Col md="12">
-              <div style={{ textAlign: 'right' }}>
+              <div style={css}>
                 <SaveBtn className="btn-m-size" onClick={this.onSave} />
+                {msg}
               </div>
             </Col>
           </Row>
         </div>
       )
-    } else {
-      content = <SomeError message={message} onRetry={this.onLoad} />
     }
 
     return (
-      <Container>
-        <Loading dialog loading={loading} />
-        {content}
-      </Container>
+      <ProfileView title="Profile">
+        <Container>
+          <Loading dialog loading={loading} />
+          {content}
+        </Container>
+      </ProfileView>
     )
   }
 }

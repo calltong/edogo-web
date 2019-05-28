@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { Container, Row, Col, Form } from 'reactstrap'
 
 import InputGroup from '../../components/forms/InputGroup'
-
 import { SignupBtn, CloseBtn, GoogleBtn } from '../../components/button'
+import { Title } from '../../components/layout'
 
 export default class Content extends Component {
   constructor() {
@@ -13,12 +13,9 @@ export default class Content extends Component {
     this.state = {
       email: '',
       password: '',
-      retry: '',
       valid: {
         email: true,
         password: false,
-        retry: false,
-        same: false,
       },
     }
 
@@ -36,8 +33,6 @@ export default class Content extends Component {
     state.valid = {
       email: false,
       password: false,
-      retry: false,
-      same: false,
     }
     this.setState(state)
   }
@@ -47,8 +42,6 @@ export default class Content extends Component {
 
     if (email === '') valid.email = true
     else if (password === '') valid.password = true
-    else if (retry === '') valid.retry = true
-    else if (password !== retry) valid.same = true
     else {
       await this.props.onEmail({ email, password })
       return
@@ -62,8 +55,14 @@ export default class Content extends Component {
     if (onGmail) onGmail(res)
   }
 
+  async onGotoPage(uri) {
+    let { onClose } = this.props
+    if (onClose) onClose(uri)
+  }
+
+
   render() {
-    let { email, password, retry, valid } = this.state
+    let { email, password, valid } = this.state
     let error = this.props.error
     let msg
     if (error !== undefined) msg = (<p className="text-res-error">{error}</p>)
@@ -71,8 +70,8 @@ export default class Content extends Component {
     let text = { textAlign: 'center' }
     let btn = { marginBottom: '2px'}
     return (
-      <Container className="layout-form">
-        <h4 style={text}>Welcome to signup</h4>
+      <div>
+        <Title style={text}>Welcome to signup</Title>
         <br />
         <Row>
           <Col md="12">
@@ -107,16 +106,6 @@ export default class Content extends Component {
                 invalid={valid.password}
                 value={password}
                 onChange={this.onChange} />
-
-              <InputGroup
-                label="Retry-Password"
-                type="password"
-                name="retry"
-                placeholder="your password"
-                feedback={valid.same ? 'your password not same' : 'please fill your password'}
-                invalid={valid.retry || valid.same}
-                value={retry}
-                onChange={this.onChange} />
             </Form>
           </Col>
           <Col md="12">
@@ -128,18 +117,21 @@ export default class Content extends Component {
               onClick={this.onEmail} />
           </Col>
           <Col md="12">
-            <CloseBtn className="btn-fullsize" style={btn} />
+            <CloseBtn
+              className="btn-fullsize"
+              style={btn}
+              onClick={this.onGotoPage.bind(this, undefined)} />
           </Col>
         </Row>
         <br />
         <Row>
           <Col>
             <p style={{fontSize: '12px', textAlign: 'center'}}>By clicking ‘Sign Up’ you agree to the
-              <Link to="../terms"> Terms of Use</Link> and <Link to="../privacy">Privacy Policy</Link>.
+              <Link to="" onClick={this.onGotoPage.bind(this, '../../terms')}> Terms of Use</Link> and <Link to="" onClick={this.onGotoPage.bind(this, '../../privacy')}>Privacy Policy</Link>.
             </p>
           </Col>
         </Row>
-      </Container>
+      </div>
     )
   }
 }

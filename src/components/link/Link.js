@@ -7,7 +7,7 @@ export default class Link extends Component {
       <RLink
         to={this.props.to}
         style={this.props.style}
-        className={`btn link ${this.props.className}`}>
+        className={`btn link ${this.props.className || ''}`}>
         {this.props.children || 'Click'}
       </RLink>
     )

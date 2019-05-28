@@ -4,8 +4,8 @@ import { PulseLoader } from 'halogenium'
 export default class Loading extends React.Component {
   render() {
     let css = 'loading'
-    let loading = this.props.loading || false
-    if (this.props.dialog) {
+    let { loading = false, dialog } = this.props
+    if (dialog) {
       css = 'loading-dialog'
     }
 

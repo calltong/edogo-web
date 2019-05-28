@@ -1,10 +1,4 @@
 
-.whiteboard {
-  cursor: crosshair;
-  position: fixed;
-  background-color: #FFFFFF;
-}
-
 .whiteboard-menu {
 
 }
@@ -15,7 +9,7 @@
 }
 
 .whiteboard-menu-btn-icon {
-  padding: 1px 5px 2px;
+  padding: 4px 4px 1px 4px;
   border-color: white;
 }
 
@@ -39,7 +33,7 @@
 }
 
 .whiteboard-nav-link {
-  padding: .4rem .1rem;
+  padding: 2px 2px;
 }
 
 .whiteboard-menu-line-btn {

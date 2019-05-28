@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Container } from 'reactstrap'
 
+import ProfileView from '../ProfileView'
 import { Loading } from '../../../components/loading'
+import Implementing from '../../../components/Implementing'
+
 import Content from './content'
 
 export class Booking extends Component {
@@ -10,7 +13,8 @@ export class Booking extends Component {
     super()
     this.state = {
       loading: false,
-      error: '',
+      status: '',
+      message: '',
     }
   }
 
@@ -19,24 +23,19 @@ export class Booking extends Component {
   }
 
   async onLoad() {
-    this.setState({ loading: true })
-    let res = await this.props.course.getList()
-    let error = ''
-    if (res.err) error = res.err
 
-    this.setState({ loading: false, error })
   }
 
   render() {
-    let owner = this.props.course.toJS().owner
-    let list = owner.list.map((item, index) => {
-      return <Content key={index} item={item} />
-    })
+    let { loading, valid, status, message } = this.state
+
     return (
-      <Container>
-        <Loading dialog loading={this.state.loading} />
-        {list}
-      </Container>
+      <ProfileView title="My Booking">
+        <Container>
+          <Loading dialog loading={loading} />
+          <Implementing />
+        </Container>
+      </ProfileView>
     )
   }
 }

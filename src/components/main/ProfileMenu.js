@@ -35,14 +35,14 @@ class ProfileMenu extends Component {
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem>
-              <Link className="header-profile-menu-btn" to="../../pv/member/booking">My Booking</Link>
+              <Link className="header-profile-menu-btn" to="../../pv/profile/booking">My Booking</Link>
             </DropdownItem>
             <DropdownItem>
               <Link className="header-profile-menu-btn" to="../../pv/messenger">Messenger</Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <Link className="header-profile-menu-btn" to="../../pv/member/profile">My Profile</Link>
+              <Link className="header-profile-menu-btn" to="../../pv/profile/general">My Profile</Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>

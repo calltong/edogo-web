@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import {
   Row, Col,
-  Form, FormGroup, Label,
-  Input, FormFeedback } from 'reactstrap'
+  Form, Input } from 'reactstrap'
 
-import Select from 'react-select'
 import _ from 'lodash'
 
 import { full_year } from '../../../constant'
 import { helper } from '../../../utils/helper'
+import { DropdownList, FormGroup } from '../../../components/forms'
 
 import ConfirmSection from '../section/confirm'
 
@@ -44,7 +43,7 @@ export default class EduForm extends Component {
     this.setState({ data })
   }
 
-  onChange(evt) {
+  onChange = (evt) => {
     let name = evt.target.name
     let value = evt.target.value
     let data = this.state.data
@@ -52,13 +51,13 @@ export default class EduForm extends Component {
     this.setState({ data })
   }
 
-  chDuration(name, item) {
+  chDuration = (name, item) => {
     let data = this.state.data
     data.duration[name] = item.value
     this.setState({ data })
   }
 
-  async onConfirm() {
+  onConfirm = async () => {
     let { data } = this.state
     let checkList = ['school', 'degree']
     let durationList = ['start_at', 'end_at']
@@ -81,7 +80,7 @@ export default class EduForm extends Component {
     }
   }
 
-  onCancel() {
+  onCancel = () => {
     let cancel = this.props.onCancel
     if (cancel) {
       cancel()
@@ -89,78 +88,63 @@ export default class EduForm extends Component {
     }
   }
 
-  reset() {
+  reset = () => {
     let val = _.cloneDeep(origin)
     this.setState(val)
   }
 
   render() {
     let { data, valid } = this.state
-    let myStart = full_year.find((item) => {
-      return item.value === data.duration.start_at
-    })
-
-    let myEnd = full_year.find((item) => {
-      return item.value === data.duration.end_at
-    })
 
     return (
       <Form>
         <h4>Create Your Education</h4>
         <Row>
           <Col md="12">
-            <FormGroup>
-              <Label>School</Label>
+            <FormGroup label="School">
               <Input
                 name="school"
                 placeholder="School"
                 invalid={valid.school}
                 value={data.school}
                 onChange={this.onChange} />
-              <FormFeedback>please fill your school</FormFeedback>
             </FormGroup>
           </Col>
           <Col md="12">
-            <FormGroup>
-              <Label>Degree</Label>
+            <FormGroup label="Degree">
               <Input
                 name="degree"
                 placeholder="your degree"
                 invalid={valid.degree}
                 value={data.degree}
                 onChange={this.onChange} />
-              <FormFeedback>please fill your degree</FormFeedback>
             </FormGroup>
           </Col>
         </Row>
 
         <Row>
           <Col md="6">
-            <FormGroup>
-              <Label>From</Label>
-              <Select
+            <FormGroup label="From">
+              <DropdownList
                 placeholder="From Year"
-                value={myStart}
-                options={full_year}
+                value={data.duration.start_at}
+                menus={full_year}
                 onChange={this.chDuration.bind(this, 'start_at')} />
             </FormGroup>
           </Col>
           <Col md="6">
-            <FormGroup>
-              <Label>To</Label>
-              <Select
+            <FormGroup label="To">
+              <DropdownList
                 placeholder="To Year"
-                value={myEnd}
-                options={full_year}
+                value={data.duration.end_at}
+                menu={full_year}
                 onChange={this.chDuration.bind(this, 'end_at')} />
             </FormGroup>
           </Col>
         </Row>
 
         <br />
-        <ConfirmSection
-          onConfirm={this.onConfirm}
-          onCancel={this.onCancel} />
+        <ConfirmSection onConfirm={this.onConfirm} onCancel={this.onCancel} />
       </Form>
     )
   }

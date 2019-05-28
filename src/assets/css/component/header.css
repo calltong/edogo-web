@@ -1,6 +1,7 @@
 .header {
   color: white;
-  background-color: #26548F;
+  background: rgb(112,179,215);
+  background: linear-gradient(180deg, rgba(112,179,215,1) 20%, rgba(91,172,216,1) 100%);
   padding: 5px 80px;
 }
 
@@ -14,23 +15,37 @@
 
 .header-menu > i {
   color: white;
-  background-color: #26548F;
+  background-color: transparent;
 }
 
 .header-item > li > a {
   color: white;
-  background-color: #26548F;
+  background-color: transparent;
 }
 
-.header-btn {
+.header-btn, .header-btn:focus {
   border: 0px solid white;
-  background-color: #26548F;
+  background-color: transparent;
+  margin-right: 2px;
+  box-shadow: 0px 0px transparent;
+}
+
+.header-login {
+  border: 0px solid white;
+  background-color: transparent;
+  margin-top: 4px;
+  padding-left: 25px;
+  padding-right: 25px;
   margin-right: 2px;
 }
 
 .header-signup {
-  border: 1px solid white;
-  background-color: #26548F;
+  border-radius: 15px;
+  border: 0px solid white;
+  background-color: #0C78B2;
+  margin-top: 4px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .header-profile {

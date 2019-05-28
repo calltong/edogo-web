@@ -4,25 +4,29 @@ import { Row, Col } from 'reactstrap'
 
 import Signin from './index'
 import { Loading } from '../../components/loading'
+import { history } from '../../utils/history'
+import { Page, MiniCol } from '../../components/layout'
 
 export class AuthRequired extends Component {
   constructor() {
     super()
-    this.state = {
-      loading: false,
-    }
+
+    this.onClose = this.onClose.bind(this)
+  }
+
+  onClose() {
+    history.push('../../../../')
   }
 
   render() {
-    let md = { size: 6, offset: 3 }
     return (
-      <div>
-        <Row>
-          <Col md={md}>
+      <Row>
+        <MiniCol>
+          <Page>
             <Signin />
-          </Col>
-        </Row>
-      </div>
+          </Page>
+        </MiniCol>
+      </Row>
     )
   }
 }

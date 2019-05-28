@@ -13,18 +13,26 @@ export default class LoginMenu extends Component {
       signup: false,
     }
 
-    this.onSignin = this.toggleSignin.bind(this)
-    this.onSignup = this.toggleSignup.bind(this)
+    this.openSignin = this.openSignin.bind(this)
+    this.closeSignin = this.closeSignin.bind(this)
+    this.openSignup = this.openSignup.bind(this)
+    this.closeSignup = this.closeSignup.bind(this)
   }
 
-  toggleSignin() {
-    let { signin } = this.state
-    this.setState({ signin: !signin })
+  openSignin() {
+    this.setState({ signin: true, signup: false })
   }
 
-  toggleSignup() {
-    let { signup } = this.state
-    this.setState({ signup: !signup })
+  closeSignin() {
+    this.setState({ signin: false })
+  }
+
+  openSignup() {
+    this.setState({ signup: true, signin: false })
+  }
+
+  closeSignup() {
+    this.setState({ signup: false })
   }
 
   render() {
@@ -32,17 +40,17 @@ export default class LoginMenu extends Component {
     return (
       <Nav className="header-item ml-auto" navbar>
         <NavItem>
-          <label className="btn header-btn" onClick={this.onSignin}>Login</label>
+          <label className="btn header-login" onClick={this.openSignin}>Login</label>
         </NavItem>
         <NavItem>
-          <label className="btn header-signup" onClick={this.onSignup}>Signup</label>
+          <label className="btn header-signup" onClick={this.openSignup}>Signup</label>
         </NavItem>
         <SigninDialog
           display={signin}
-          onClose={this.onSignin} />
+          onClose={this.closeSignin} />
         <SignupDialog
           display={signup}
-          onClose={this.onSignup} />
+          onClose={this.closeSignup} />
       </Nav>
     )
   }

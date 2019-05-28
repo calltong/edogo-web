@@ -4,37 +4,37 @@ import { Nav, Card, CardHeader, CardBody } from 'reactstrap'
 const menus = [
   {
     label: 'Profile',
-    url: `/pv/member/profile`,
+    url: `/pv/profile/general`,
     icon: 'far fa-user',
   },
   {
     label: 'My Booking',
-    url: `/pv/member/booking`,
+    url: `/pv/profile/booking`,
     icon: 'far fa-address-book',
   },
   {
     label: 'Be Teacher',
-    url: `/pv/member/teacher`,
+    url: `/pv/profile/teacher`,
     icon: 'fas fa-user-graduate',
   },
   {
     label: 'My Course',
-    url: `/pv/member/course`,
+    url: `/pv/profile/course`,
     icon: 'fas fa-book',
   },
   {
     label: 'Payment',
-    url: `/pv/member/payment`,
+    url: `/pv/profile/payment`,
     icon: 'far fa-money-bill-alt',
   },
   {
     label: 'Invitation',
-    url: `/pv/member/invitation`,
+    url: `/pv/profile/invitation`,
     icon: 'fas fa-link',
   },
   {
     label: 'Password',
-    url: `/pv/member/password`,
+    url: `/pv/profile/password`,
     icon: 'fas fa-key',
   }
 ]

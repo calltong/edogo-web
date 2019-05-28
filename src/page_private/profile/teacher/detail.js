@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import {
-  Row, Col,
-  FormGroup, Label, Input } from 'reactstrap'
+import { Row, Col, Input } from 'reactstrap'
 
-import { Select, Invalid } from '../../../components/forms'
+import { DropdownList, CheckList, FormGroup } from '../../../components/forms'
 
 import { rates, tutors, languages } from '../../../constant'
 import TitleSection from '../section/title'
@@ -19,106 +17,81 @@ export class Detail extends Component {
     this.chTutor = this.chTutor.bind(this)
   }
 
-  chValue(evt) {
+  componentWillReceiveProps() {
+    this.forceUpdate()
+  }
+
+  chValue = (evt) => {
     let name = evt.target.name
     let value = evt.target.value
-    this.data[name] = value
-    this.props.member.setTeacher(this.data)
+    this.doc.teacher[name] = value
+    this.props.member.setInfo(this.doc)
   }
 
-  chRate(item) {
-    this.data.rate = item.value
-    this.props.member.setTeacher(this.data)
+  chRate = (value) => {
+    this.doc.teacher.rate = value
+    this.props.member.setInfo(this.doc)
   }
 
-  chLanguage(value) {
-    this.data.lang_list = value.map(item => {
-      return item.value
-    })
-    this.props.member.setTeacher(this.data)
+  chLanguage = (value) => {
+    this.doc.teacher.lang_list = value
+    this.props.member.setInfo(this.doc)
   }
 
-  chTutor(value) {
-    this.data.tutor_list = value.map(item => {
-      return item.value
-    })
-    this.props.member.setTeacher(this.data)
+  chTutor = (value) => {
+    this.doc.teacher.tutor_list = value
+    this.props.member.setInfo(this.doc)
   }
 
   render() {
-    let member = this.props.member.toJS()
-    let { doc } = member
+    let { valid = {} } = this.props
+    let doc = this.props.member.toJS().info
+    this.doc = doc
     let teacher = doc.teacher
-    let valid = member.valid.teacher
-    this.data = teacher
 
-    let myRate = rates.find(item => {
-      return item.value === teacher.rate
-    })
-
-    let myLangs = teacher.lang_list.map(item => {
-      return languages.find((it) => {
-        return it.value === item
-      })
-    })
-
-    let myTutors = teacher.tutor_list.map(item => {
-      return tutors.find((it) => {
-        return it.value === item
-      })
-    })
     return (
       <div>
         <TitleSection value="Basic Information" />
         <Row>
           <Col md="3">
-            <FormGroup>
-              <Label>Rate per hours</Label>
-              <Select
+            <FormGroup label="Rate per hours">
+              <DropdownList
                 name="rate"
                 placeholder="Fill your rate"
-                value={myRate}
-                options={rates}
+                value={teacher.rate}
+                menus={rates}
                 onChange={this.chRate} />
-              <Invalid invalid={valid.rate} text="please fill rate" />
             </FormGroup>
           </Col>
           <Col md="9">
-            <FormGroup>
-              <Label>Languages</Label>
-              <Select
-                isMulti
+            <FormGroup label="Languages">
+              <CheckList
                 placeholder="Fill your languages"
-                value={myLangs}
-                options={languages}
+                value={teacher.lang_list}
+                menus={languages}
                 onChange={this.chLanguage} />
-              <Invalid invalid={valid.languages} text="please fill languages" />
             </FormGroup>
           </Col>
         </Row>
 
         <Row>
           <Col md="12">
-            <FormGroup>
-              <Label>My Tutor</Label>
-              <Select
-                isMulti
+            <FormGroup label="My Tutor">
+              <CheckList
                 placeholder="Fill your tutors"
-                value={myTutors}
-                options={tutors}
+                value={teacher.tutor_list}
+                menus={tutors}
                 onChange={this.chTutor} />
-              <Invalid invalid={valid.tutor} text="please fill tutor" />
             </FormGroup>
 
-            <FormGroup>
-              <Label>About Me</Label>
+            <FormGroup label="About Me">
               <Input
                 name="about"
                 placeholder="about me"
                 type="textarea"
                 rows="4"
+                value={teacher.about}
                 onChange={this.chValue} />
-              <Invalid invalid={valid.about} text="please fill about me" />
             </FormGroup>
           </Col>
         </Row>

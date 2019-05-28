@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import styled from 'styled-components'
 // import _ from 'lodash'
 import moment from 'moment'
 
-import { timer } from '../../../../utils/timer'
 import Menu from './menu'
+import { timer } from '../../../../utils/timer'
 import { MethodType } from '../../../../service/whiteboard'
 
 const EVENTS = {
@@ -46,11 +47,12 @@ export class Whiteboard extends Component {
     this.work = this.refs.work
 
     this.canvas = this.refs.canvas
+
     this.ctx = this.canvas.getContext('2d')
     await this.onResize()
     await this.clear()
     this.props.session.setRoomPage(this)
-    window.addEventListener("resize", this.onResize, false);
+    window.addEventListener("resize", this.onResize, false)
   }
 
   async clear() {
@@ -159,7 +161,6 @@ export class Whiteboard extends Component {
         break
       default:
     }
-    console.log(type, 'menu')
   }
 
   processImage({ type, data }) {
@@ -168,10 +169,10 @@ export class Whiteboard extends Component {
   }
 
   processLine({ type, data }) {
+    let { setting } = this.state
     switch (type) {
       case MethodType.line.start:
-      let setting = this.state.setting
-      let start = data
+        let start = data
         this.line = {
           start,
           list: [],
@@ -224,8 +225,10 @@ export class Whiteboard extends Component {
   }
 
   onStartLine(e) {
-		let canvasX = e.pageX - this.canvas.offsetLeft
-		let canvasY = e.pageY - this.canvas.offsetTop
+    let offset = this.canvas.getBoundingClientRect()
+    console.log('page:', offset)
+		let canvasX = e.pageX - offset.left
+		let canvasY = e.pageY - offset.top
     let data = {x: canvasX, y: canvasY}
 
     let type = MethodType.line.start
@@ -235,8 +238,11 @@ export class Whiteboard extends Component {
 
   onDrawingLine(e) {
     if (this.isDown !== false) {
-			let canvasX = e.pageX - this.canvas.offsetLeft
-			let canvasY = e.pageY - this.canvas.offsetTop
+      let offset = this.canvas.getBoundingClientRect()
+			//let canvasX = e.pageX - this.canvas.offsetLeft
+			//let canvasY = e.pageY - this.canvas.offsetTop
+      let canvasX = e.pageX - offset.left
+      let canvasY = e.pageY - offset.top
       let point = {x: canvasX, y: canvasY}
       let data = { list: [point] }
 
@@ -312,9 +318,9 @@ export class Whiteboard extends Component {
           onUndo={index < 0 ? undefined : this.onUndo.bind(this)}
           onRedo={index + 1 === len ? undefined : this.onRedo.bind(this)}
           onReset={index < 0 ? undefined : this.onReset.bind(this)} />
-        <canvas
+
+        <Canvas
           ref="canvas"
-          className="whiteboard"
           onMouseEnter={this.onMouseEnter.bind(this)}
           onMouseOut={this.onMouseOut.bind(this)}
           onMouseDown={this.onStartLine.bind(this)}
@@ -324,5 +330,11 @@ export class Whiteboard extends Component {
     )
   }
 }
+
+export const Canvas = styled.canvas`
+  cursor: crosshair;
+  width: 100%;
+  background-color: #FFFFFF;
+`
 
 export default inject('session')(observer(Whiteboard))

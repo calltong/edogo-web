@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import { Page, Title } from './layout'
 
 export default class Completed extends Component {
 
@@ -8,19 +9,19 @@ export default class Completed extends Component {
     let text = { textAlign: 'center' }
 
     return (
-      <Container className="layout-form">
-        <h2 style={text}>{this.props.title || 'Completed'}</h2>
+      <Page>
+        <Title>{this.props.title || 'Completed'}</Title>
         <br />
-        <h4 style={text}>{this.props.detail}</h4>
+        <p style={text}>{this.props.detail}</p>
         <br />
         <p style={text}><i className="fas fa-check-circle layout-form-icon text-success" /></p>
         <br />
         <Row>
           <Col md="12" sm="12" xs="12">
-            <p style={text}>go to home page <Link to="../../../">click here</Link></p>
+            <p style={text}>Go to home page <Link to="../../../">click here</Link></p>
           </Col>
         </Row>
-      </Container>
+      </Page>
     )
   }
 }
